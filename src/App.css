@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+@import "tailwindcss";
+
+@theme { --font-titillium: "Titillium Web", sans-serif;}
+
+.titillium-web-regular-italic {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@layer base{
+
+   body {font-family: "Titillium Web", sans-serif;}
+    .main-container{
+        @apply relative w-full h-full;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+    }
+
+    .section-pages{
+        @apply w-full h-full overflow-hidden;
+        scroll-snap-align: start;
+    }
+
+    .headerText{
+    @apply text-white underline;
+  }
+
+  .custom-scrollbar{
+    scrollbar-width: thin;
+    scrollbar-color:#60A5FA transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;       /* Very dark background to keep track subtle */
+  border-radius: 400px;
+}
+
+  .custom-scrollbar::-webkit-scrollbar {
+  width: 0.002px;                
+}
+}
