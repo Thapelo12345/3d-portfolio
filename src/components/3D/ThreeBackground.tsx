@@ -5,6 +5,7 @@ import Earth from "./earth";
 import Jupiter from "./jupiter";
 import Mars from "./mars";
 import Pluto from "./pluto";
+import { Suspense } from 'react'
 import { useMainStore } from "../../statemanagement/store";
 import * as THREE from "three";
 
@@ -72,6 +73,9 @@ export default function ThreeBackground() {
           position: [4, 0, 8],
         }}
       >
+         {/* <Suspense fallback={null}>
+          <h1 className="text-2xl text-white text-center"> Loading!....</h1>
+        </Suspense> */}
         <CameraController />
         <Stars />
         <directionalLight position={[-2, 0.2, 1.5]} color={"white"} />

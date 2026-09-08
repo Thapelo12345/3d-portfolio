@@ -5,7 +5,7 @@ import babel from "@rolldown/plugin-babel";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/3d-portfolio",
+  base: "/3d-portfolio/",
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] }),

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MainNavBtn from "./ui/mainNavBtn";
-import { useMainStore } from "../statemanagement/store";
+import { publicAsset } from "../assets/publicAsset";
 
 export default function MainNav() {
   const [hoverStart, setHoverStart] = useState(0);
@@ -24,25 +24,25 @@ export default function MainNav() {
 
         <MainNavBtn
           btnText="Home"
-          imageUrl="public/Icon images/button-icon-png-21065.png"
+          imageUrl={publicAsset("Icon images/button-icon-png-21065.png")}
           setHoverStart={setHoverStart}
           setHoverWidth={setHoverwidth}
         />
         <MainNavBtn
           btnText="About"
-          imageUrl="public/Icon images/face-icon-png-4282.png"
+          imageUrl={publicAsset("Icon images/face-icon-png-4282.png")}
           setHoverStart={setHoverStart}
           setHoverWidth={setHoverwidth}
         />
         <MainNavBtn
           btnText="Projects"
-          imageUrl="public/Icon images/settings-icon-14970.png"
+          imageUrl={publicAsset("Icon images/settings-icon-14970.png")}
           setHoverStart={setHoverStart}
           setHoverWidth={setHoverwidth}
         />
         <MainNavBtn
           btnText="Contacts"
-          imageUrl="public/Icon images/book-icon-152.png"
+          imageUrl={publicAsset("Icon images/book-icon-152.png")}
           setHoverStart={setHoverStart}
           setHoverWidth={setHoverwidth}
         />
