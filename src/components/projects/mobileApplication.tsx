@@ -11,7 +11,7 @@ export default function MobileApplications() {
       </h1>
 
       <MobileCard
-        projectImageUrl={publicAsset("Projects/mobile.png")}
+        projectImageUrl={publicAsset("Projects/first_dark_page.png")}
         projectTitle="WatchTv"
         projectDescription="This mobile application allows users to create an account, log in securely, and enjoy a wide selection of movies and TV series. Users can browse available content, search for their favorite titles, and stream movies and series directly from their mobile devices through an intuitive and user-friendly interface."
         projectItems={frameWorks}

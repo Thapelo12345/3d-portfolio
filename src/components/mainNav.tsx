@@ -7,9 +7,7 @@ export default function MainNav() {
   const [hoverWidth, setHoverwidth] = useState(0);
 
   return (
-    <nav
-      className="fixed left-[5%] top-12 md:top-0 md:left-0 m-2 py-0 w-fit h-fit rounded-2xl z-50"
-    >
+    <nav className="fixed left-[5%] top-12 md:top-0 md:left-0 m-2 py-0 w-fit h-fit rounded-2xl z-50">
       <div className="relative py-1 px-4 p-2 flex flex-row md:gap-5 items-center justify-center">
         {/* Hove div */}
         <div

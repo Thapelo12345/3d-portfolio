@@ -1,13 +1,28 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef, useEffect } from "react";
+import { Component, Suspense, useRef, useEffect } from "react";
+import type { ReactNode } from "react";
 import Stars from "./stars";
 import Earth from "./earth";
 import Jupiter from "./jupiter";
 import Mars from "./mars";
 import Pluto from "./pluto";
-import { Suspense } from 'react'
 import { useMainStore } from "../../statemanagement/store";
 import * as THREE from "three";
+
+class ThreeSceneBoundary extends Component<
+  { children: ReactNode },
+  { hasError: boolean }
+> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  render() {
+    return this.state.hasError ? null : this.props.children;
+  }
+}
 
 function CameraController() {
   const currentPage = useMainStore((state) => state.currentPage);
@@ -18,17 +33,13 @@ function CameraController() {
     if (currentPage === "header-page") {
       fovRef.current = 6;
       targetX.current = 4;
-    }
-    else if (currentPage === "about-page") {
+    } else if (currentPage === "about-page") {
       fovRef.current = 15;
       targetX.current = 4;
-    }
-
-    else if (currentPage === "skills-page") {
+    } else if (currentPage === "skills-page") {
       fovRef.current = 45;
       targetX.current = 4;
-    }
-     else if (currentPage === "contact-page") {
+    } else if (currentPage === "contact-page") {
       targetX.current = -6.1;
       fovRef.current = 15;
     }
@@ -64,26 +75,27 @@ export default function ThreeBackground() {
       className="absolute inset-0 flex items-center justify-center bg-black -z-40"
       style={{ width: "100vw", height: "100vh" }}
     >
-      <Canvas
-        camera={{
-          fov: 6,
-          near: 0.1,
-          far: 2000,
-          aspect: aspectValue,
-          position: [4, 0, 8],
-        }}
-      >
-         {/* <Suspense fallback={null}>
-          <h1 className="text-2xl text-white text-center"> Loading!....</h1>
-        </Suspense> */}
-        <CameraController />
-        <Stars />
-        <directionalLight position={[-2, 0.2, 1.5]} color={"white"} />
-        <Mars />
-        <Earth />
-        <Jupiter />
-        <Pluto />
-      </Canvas>
+      <ThreeSceneBoundary>
+        <Canvas
+          camera={{
+            fov: 6,
+            near: 0.1,
+            far: 2000,
+            aspect: aspectValue,
+            position: [4, 0, 8],
+          }}
+        >
+          <Suspense fallback={null}>
+            <CameraController />
+            <Stars />
+            <directionalLight position={[-2, 0.2, 1.5]} color={"white"} />
+            <Mars />
+            <Earth />
+            <Jupiter />
+            <Pluto />
+          </Suspense>
+        </Canvas>
+      </ThreeSceneBoundary>
     </div>
   );
 }
