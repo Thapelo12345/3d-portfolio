@@ -71,7 +71,7 @@ export default function HeaderText() {
   }, []);
 
   return (
-    <div className="mt-[30%] md:mt-[10%] rounded-lg p-4 w-full md:w-1/2 text-center md:text-left overflow-hidden">
+    <div className="border-2 border-green-500 mt-[30%] md:mt-[10%] rounded-lg p-4 w-full md:w-1/2 text-center md:text-left overflow-hidden">
       <div className="p-2 rounded-md">
         <div className="overflow-hidden">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 overflow-hidden">
@@ -87,8 +87,7 @@ export default function HeaderText() {
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               style={{
-                backgroundImage:
-                  "linear-gradient(90deg, #8b5cf6, aquamarine, #d946ef, #3b82f6, #8b5cf6)",
+                backgroundImage: "linear-gradient(90deg, #8b5cf6, aquamarine, #d946ef, #3b82f6, #8b5cf6)",
                 backgroundSize: "200% auto",
               }}
             >

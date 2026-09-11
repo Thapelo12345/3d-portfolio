@@ -2,7 +2,7 @@ import Packages from "../about/libraries";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { scale } from "framer-motion";
+import ProjectImage from "./ui/projectImage";
 import SplitText from "gsap/src/SplitText";
 
 type PROPS = {
@@ -30,6 +30,7 @@ export default function ProjectCard({
   const imageElementRef = useRef<HTMLImageElement | null>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null)
 
+  // words animation
   useGSAP(()=>{
     gsap.registerPlugin(SplitText)
 
@@ -89,14 +90,7 @@ observer.observe(targetElement);
     flex ${projectRevere ? "flex-col md:flex-row-reverse" : "flex-col md:flex-row"}
     border-t border-t-[rgba(96,165,250,0.5)] w-[99%] mt-2 bg-black/20 h-auto md:h-90 md:my-15 mx-2 overflow-hidden`}>
       
-      <div className="flex items-center justify-center w-full md:w-1/2 h-full">
-        <img
-          ref={imageElementRef}
-          className="project-image w-full md:w-150 h-80 rounded-lg"
-          src={projectImageUrl}
-          alt="Project image"
-        />
-      </div>
+      <ProjectImage imageUrl={projectImageUrl} />
 
       <div className="w-full md:w-1/2 h-full py-4 px-2 backdrop:blur-xs overflow-hidden">
         <h1 className="header-char text-white text-center text-2xl my-4">

@@ -45,7 +45,7 @@ export default function Header() {
     <div
       ref={headerPageRef}
       id="header-page"
-      className="section-pages flex items-center justify-center"
+      className="border-2 border-red-500 lg:overflow-y-auto section-pages flex items-center justify-center"
     >
       <div className="h-full mx-auto px-6 md:px-12 relative z-10 transition-transform duration-300 ease-out">
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">

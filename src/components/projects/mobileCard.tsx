@@ -19,7 +19,7 @@ export default function MobileCard({
 
       <div className="flex items-center justify-center w-full md:w-1/2 h-full">
         <img
-          className="bg-transparent w-150 h-50 md:h-80 rounded-lg"
+          className="bg-transparent w-50 h-50 md:h-80 rounded-lg"
           src={projectImageUrl}
           alt="Project image"
         />
