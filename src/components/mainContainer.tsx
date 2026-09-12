@@ -12,8 +12,8 @@ export default function MainContainer() {
     <div className="main-container custom-scrollbar">
       <MainNav />
       <Header />
-      <About />
       <Skills />
+      <About />
       <Contact />
     </div>
   );

@@ -26,18 +26,21 @@ export default function MainNav() {
           setHoverStart={setHoverStart}
           setHoverWidth={setHoverwidth}
         />
+
+         <MainNavBtn
+          btnText="Projects"
+          imageUrl={publicAsset("Icon images/settings-icon-14970.png")}
+          setHoverStart={setHoverStart}
+          setHoverWidth={setHoverwidth}
+        />
+        
         <MainNavBtn
           btnText="About"
           imageUrl={publicAsset("Icon images/face-icon-png-4282.png")}
           setHoverStart={setHoverStart}
           setHoverWidth={setHoverwidth}
         />
-        <MainNavBtn
-          btnText="Projects"
-          imageUrl={publicAsset("Icon images/settings-icon-14970.png")}
-          setHoverStart={setHoverStart}
-          setHoverWidth={setHoverwidth}
-        />
+       
         <MainNavBtn
           btnText="Contacts"
           imageUrl={publicAsset("Icon images/book-icon-152.png")}

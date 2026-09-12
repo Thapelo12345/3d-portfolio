@@ -20,76 +20,83 @@ export default function ProjectCard({
   projectDescription,
   projectLink,
   projectItems,
-  projectRevere
+  projectRevere,
 }: PROPS) {
-
   const imageRef = useRef<gsap.core.Timeline | null>(null);
   const headerRef = useRef<gsap.core.Timeline | null>(null);
   const describeRef = useRef<gsap.core.Timeline | null>(null);
 
   const imageElementRef = useRef<HTMLImageElement | null>(null);
-  const paragraphRef = useRef<HTMLParagraphElement>(null)
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
 
   // words animation
-  useGSAP(()=>{
-    gsap.registerPlugin(SplitText)
+  useGSAP(() => {
+    gsap.registerPlugin(SplitText);
 
-    const headerSplitter = SplitText.create(".header-char", {type: "chars"})
-    const describeSplitter = SplitText.create(paragraphRef.current, {type: "words"})
+    const headerSplitter = SplitText.create(".header-char", { type: "chars" });
+    const describeSplitter = SplitText.create(paragraphRef.current, {
+      type: "words",
+    });
 
-    headerRef.current = gsap.timeline({pause: true}).from(headerSplitter.chars, {
-      y: -90,
-      stagger: 0.05,
-      opacity: 0.1,
-      duration: 0.2
-    })
+    headerRef.current = gsap
+      .timeline({ pause: true })
+      .from(headerSplitter.chars, {
+        y: -90,
+        stagger: 0.05,
+        opacity: 0.1,
+        duration: 0.2,
+      });
 
-    describeRef.current = gsap.timeline({pause: true}).from(describeSplitter.words, {
-      opacity: 0.05,
-      stagger: 0.07,
-      duration: 0.05,
-      ease: "sine.inOut"
-    })
+    describeRef.current = gsap
+      .timeline({ pause: true })
+      .from(describeSplitter.words, {
+        opacity: 0.05,
+        stagger: 0.07,
+        duration: 0.05,
+        ease: "sine.inOut",
+      });
 
-    imageRef.current = gsap.timeline({pause: true}).from(imageElementRef.current,{
-      stagger: 0.4,
-      scale: 0.5,
-      opacity: 0.2,
-      duration: 0.5,
-    })
-  })
+    imageRef.current = gsap
+      .timeline({ pause: true })
+      .from(imageElementRef.current, {
+        stagger: 0.4,
+        scale: 0.5,
+        opacity: 0.2,
+        duration: 0.5,
+      });
+  });
 
-  useEffect(()=>{
-  const observerOptions = {
-  root: null,
-  threshold: 1.0
-};
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      threshold: 1.0,
+    };
 
-const observer = new IntersectionObserver(([entries]) => {
-  if(!imageRef.current || !headerRef.current || !describeRef.current) return
-  if (entries.isIntersecting && entries.intersectionRatio === 1) {
-    imageRef.current.play()
-    headerRef.current.play()
-    describeRef.current.play()
-  }
-  else {
-    imageRef.current.reverse()
-    headerRef.current.reverse()
-    describeRef.current?.reverse()
-  }
-      
-}, observerOptions);
+    const observer = new IntersectionObserver(([entries]) => {
+      if (!imageRef.current || !headerRef.current || !describeRef.current)
+        return;
+      if (entries.isIntersecting && entries.intersectionRatio === 1) {
+        imageRef.current.play();
+        headerRef.current.play();
+        describeRef.current.play();
+      } else {
+        imageRef.current.reverse();
+        headerRef.current.reverse();
+        describeRef.current?.reverse();
+      }
+    }, observerOptions);
 
-const targetElement = document.getElementById("skills-page")
-if(!targetElement) return
-observer.observe(targetElement);
-  }, [])
+    const targetElement = document.getElementById("skills-page");
+    if (!targetElement) return;
+    observer.observe(targetElement);
+  }, []);
 
   return (
-    <div className={`
+    <div
+      className={`
     flex ${projectRevere ? "flex-col md:flex-row-reverse" : "flex-col md:flex-row"}
-    border-t border-t-[rgba(96,165,250,0.5)] w-[99%] mt-2 bg-black/20 h-auto md:h-90 md:my-15 mx-2 overflow-hidden`}>
-      
+    border-t border-t-[rgba(96,165,250,0.5)] w-[99%] mt-2 bg-black/20 h-auto md:h-90 md:my-15 mx-2 overflow-hidden`}
+    >
       <ProjectImage imageUrl={projectImageUrl} />
 
       <div className="w-full md:w-1/2 h-full py-4 px-2 backdrop:blur-xs overflow-hidden">
@@ -97,9 +104,9 @@ observer.observe(targetElement);
           {projectTitle}
           <span className="text-blue-400"> Application</span>
         </h1>
-        <p 
-        ref={paragraphRef}
-        className="describe text-white/40">{projectDescription}</p>
+        <p ref={paragraphRef} className="describe text-white/40">
+          {projectDescription}
+        </p>
 
         <hr className="border-t border-blue-400 my-6" />
 
@@ -109,11 +116,14 @@ observer.observe(targetElement);
           className="p-2 m-4 px-8 w-fit bg-[rgba(96,165,250,0.5)] border-2 border-white text-white rounded-2xl cursor-pointer"
           style={{
             boxShadow:
-            "inset 2px 2px 2px black, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
+              "inset 2px 2px 2px black, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
             textShadow: "1px 1px 2px black",
           }}
         >
+          <a href={projectLink} target="_blank">
+
           Link
+          </a>
         </button>
       </div>
     </div>
