@@ -1,7 +1,7 @@
 import MobileCard from "./mobileCard";
 import { publicAsset } from "../../assets/publicAsset";
 
-const frameWorks = ["React-Native", "Clerk", "nativewind", "playwright"];
+const frameWorks = ["React-Native", "Clerk", "nativewind", "Jest"];
 export default function MobileApplications() {
   return (
     <div className="w-full h-fit mb-20 -mt-85 md:mt-130 overflow-x-hidden">
@@ -11,8 +11,8 @@ export default function MobileApplications() {
       </h1>
 
       <MobileCard
-        projectImageUrl={publicAsset("Projects/first_dark_page.png")}
-        projectTitle="WatchTv"
+        projectImageUrl={publicAsset("mobile project/background-remover-dark-main.png")}
+        projectTitle="NestStream"
         projectDescription="This android mobile application allows users to create an account, log in securely, and enjoy a wide selection of movies and TV series. Users can browse available content, search for their favorite titles, and stream movies and series directly from their mobile devices through an intuitive and user-friendly interface."
         projectItems={frameWorks}
         projectLink=""

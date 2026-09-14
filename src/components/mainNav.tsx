@@ -14,7 +14,7 @@ export default function MainNav() {
           className="absolute w-full h-full -z-50 rounded-2xl bg-black/30 backdrop-blur-[2px] transition-all duration-300"
           style={{
             boxShadow:
-              "inset 1px 1px 10px rgba(255, 255, 255, 0.4), inset -1px -1px 2px rgba(255, 255, 255, 0.4)",
+              "inset 1px 1px 10px rgba(96, 165, 250, 0.4), inset -1px -1px 2px rgba(96, 165, 250, 0.4)",
             width: hoverWidth == 0 ? "100%" : hoverWidth,
             left: hoverStart,
           }}

@@ -30,7 +30,11 @@ export default function Contact() {
       <div className="custom-scrollbar w-full flex flex-col overflow-y-auto">
         <PageTitle pageTitle="Personal Contacts" />
         <ContactHeader />  
-        <Details />     
+        <Details />  
+
+        <div className="border-2 border-amber-300 w-full">
+        
+        </div>   
       </div>
     </div>
   );

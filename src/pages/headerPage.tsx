@@ -45,7 +45,7 @@ export default function Header() {
     <div
       ref={headerPageRef}
       id="header-page"
-      className="lg:overflow-y-auto section-pages flex items-center justify-center"
+      className="lg:overflow-y-auto section-pages flex flex-col items-center justify-center"
     >
       <div className="h-full mx-auto px-6 md:px-12 relative z-10 transition-transform duration-300 ease-out">
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
@@ -63,6 +63,12 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      <p className="text-white p-2 text-sm text-center text-wrap w-1/2"
+      style={{textShadow: "1px 1px 2px black"}}
+      >
+        Full-Stack Web & Mobile Developer specializing in end-to-end solutions. I build robust backends, intuitive frontends, and ensure quality with Playwright automated testing. From concept to code to QA—I handle the full lifecycle.
+      </p>
     </div>
   );
 }
