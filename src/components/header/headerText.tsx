@@ -5,11 +5,10 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/src/SplitText";
-import ScrollTrigger from "gsap/src/ScrollTrigger";
 
 export default function HeaderText() {
   const headerTextRef = useRef<HTMLDivElement>(null);
-  const myNameRef = useRef<gsap.core.Timeline | null>(null);
+  const greetElementRef = useRef<HTMLSpanElement>(null);
   const greetRef = useRef<gsap.core.Timeline | null>(null);
 
   const bottomBtn = useRef<gsap.core.Timeline | null>(null);
@@ -17,12 +16,14 @@ export default function HeaderText() {
   const setCurrentPage = useMainStore((state) => state.setCurrentPage);
 
   useGSAP(() => {
-    gsap.registerPlugin(SplitText, ScrollTrigger);
+    gsap.registerPlugin(SplitText);
 
-    const nameSplitter = SplitText.create(".myName", { type: "words" });
-    const greetSplitter = SplitText.create(".greet", { type: "words" });
+    const greetElement = greetElementRef.current;
+    if (!greetElement) return;
 
-    bottomBtn.current = gsap.timeline({ pause: true }).from(".bottom-btn", {
+    const greetSplitter = SplitText.create(greetElement, { type: "words" });
+
+    bottomBtn.current = gsap.timeline({ paused: true }).from(".bottom-btn", {
       y: 100,
       stagger: 0.4,
       opacity: 0.2,
@@ -31,7 +32,7 @@ export default function HeaderText() {
     });
 
     greetRef.current = gsap
-      .timeline({ pause: true })
+      .timeline({ paused: true })
       .from(greetSplitter.words, {
         y: -90,
         stagger: 0.4,
@@ -40,55 +41,51 @@ export default function HeaderText() {
         ease: "back.in",
       });
 
-    myNameRef.current = gsap
-      .timeline({ pause: true })
-      .from(nameSplitter.words, {
-        x: -500,
-        stagger: 0.4,
-        duration: 0.6,
-        ease: "circ.inOut",
-      });
-  });
+  }, { scope: headerTextRef });
 
   useEffect(() => {
-    const observerOptions = { root: null, threshold: 1.0 };
+    const headerText = headerTextRef.current;
+    if (!headerText) return;
 
     const observer = new IntersectionObserver(([entries]) => {
-      if (entries.isIntersecting && entries.intersectionRatio === 1) {
-        myNameRef.current?.play();
-        greetRef.current?.play();
-        bottomBtn.current?.play();
-      } else {
-        myNameRef.current?.reverse();
-        greetRef.current?.reverse();
-        bottomBtn.current?.reverse();
+      if (entries.isIntersecting) {
+        const page = headerText.closest(".section-pages");
+        if (page?.id) setCurrentPage(page.id);
+        greetRef.current?.restart();
+        bottomBtn.current?.restart();
       }
-    }, observerOptions);
+    }, {
+      root: headerText.closest(".main-container"),
+      threshold: 0,
+    });
 
-    const observeElement = document.getElementById("header-page");
-    if (!observeElement) return;
-    observer.observe(observeElement);
-  }, []);
+    observer.observe(headerText);
+    return () => observer.disconnect();
+  }, [setCurrentPage]);
 
   return (
-    <div className="mt-[30%] md:mt-[10%] rounded-lg p-4 w-full md:w-1/2 text-center md:text-left overflow-hidden">
+    <div ref={headerTextRef} className="mb-0 mt-[60%] md:mt-[10%] rounded-lg p-4 w-full md:w-1/2 text-center md:text-left overflow-hidden">
       <div className="p-2 rounded-md">
         <div className="overflow-hidden">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 overflow-hidden">
             <span
+              ref={greetElementRef}
               className="greet text-white flex flex-row m-2"
               style={{ textShadow: "1px 0 3px black" }}
             >
               Hi, I'm
             </span>
             <motion.span
-              // className="myName font-light text-[orange]"
-              className="text-6xl font-normal bg-clip-text text-transparent"
+              className="inline-block max-w-full text-4xl sm:text-5xl md:text-6xl font-normal leading-tight"
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               style={{
                 backgroundImage: "linear-gradient(90deg, #8b5cf6, aquamarine, #d946ef, #3b82f6, #8b5cf6)",
-                backgroundSize: "200% auto",
+                backgroundSize: "300% 100%",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                color: "transparent",
+                WebkitTextFillColor: "transparent",
               }}
             >
               Thapelo Petrick Sikhosana

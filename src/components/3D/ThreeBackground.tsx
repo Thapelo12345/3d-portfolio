@@ -77,6 +77,9 @@ export default function ThreeBackground() {
     >
       <ThreeSceneBoundary>
         <Canvas
+        dpr={[1, 1.5]}
+        gl={{ powerPreference: "high-performance", antialias: false }}
+        // raycaster={{ enabled: window.innerWidth > 768 }}
           camera={{
             fov: 6,
             near: 0.1,

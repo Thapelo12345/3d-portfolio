@@ -41,10 +41,11 @@ export default function Earth() {
     if (earth.current !== null) earth.current.rotation.y += delta * 0.08;
     if (!earth.current) return;
 
-    earth.current.position.y = THREE.MathUtils.lerp(
+    earth.current.position.y = THREE.MathUtils.damp(
       earth.current.position.y,
       targetY.current,
-      0.05,
+      3,
+      delta,
     );
   });
 

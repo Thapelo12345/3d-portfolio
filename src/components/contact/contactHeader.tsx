@@ -60,7 +60,7 @@ const questionRef = useRef<gsap.core.Timeline | null>(null);
         <h1 
         className="contact-header text-white text-6xl">
           Let's talk across
-          <span className="text-blue-400">the distance.</span>
+          <span className="text-blue-400"> A distance.</span>
         </h1>
 
         <p className="question text-white/50">

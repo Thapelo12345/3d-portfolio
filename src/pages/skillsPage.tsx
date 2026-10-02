@@ -30,7 +30,7 @@ export default function Skills() {
 
   return (
     <div ref={skillsPage} id="skills-page" className="section-pages">
-      <div className="custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full overflow-y-scroll">
+      <div className="skills-scroll-container custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full overflow-y-scroll">
         <PageTitle pageTitle="My Work" />
         <WebApplications />
         <MobileApplications />

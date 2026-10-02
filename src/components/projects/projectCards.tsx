@@ -22,73 +22,61 @@ export default function ProjectCard({
   projectItems,
   projectRevere,
 }: PROPS) {
-  const imageRef = useRef<gsap.core.Timeline | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<gsap.core.Timeline | null>(null);
   const describeRef = useRef<gsap.core.Timeline | null>(null);
 
-  const imageElementRef = useRef<HTMLImageElement | null>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
 
   // words animation
-  useGSAP(() => {
-    gsap.registerPlugin(SplitText);
+  useGSAP(
+    () => {
+      gsap.registerPlugin(SplitText);
 
-    const headerSplitter = SplitText.create(".header-char", { type: "chars" });
-    const describeSplitter = SplitText.create(paragraphRef.current, {
-      type: "words",
-    });
+      const paragraph = paragraphRef.current;
+      if (!paragraph) return;
 
-    headerRef.current = gsap
-      .timeline({ pause: true })
-      .from(headerSplitter.chars, {
-        y: -90,
-        stagger: 0.05,
-        opacity: 0.1,
-        duration: 0.2,
-      });
+      const headerSplitter = SplitText.create(".header-char", {type: "chars"});
+      const describeSplitter = SplitText.create(paragraph, {type: "words"});
 
-    describeRef.current = gsap
-      .timeline({ pause: true })
-      .from(describeSplitter.words, {
-        opacity: 0.05,
-        stagger: 0.07,
-        duration: 0.05,
-        ease: "sine.inOut",
-      });
+      headerRef.current = gsap
+        .timeline({ paused: true })
+        .from(headerSplitter.chars, {
+          y: -90,
+          stagger: 0.05,
+          opacity: 0.1,
+          duration: 0.2,
+        });
 
-    imageRef.current = gsap
-      .timeline({ pause: true })
-      .from(imageElementRef.current, {
-        stagger: 0.4,
-        scale: 0.5,
-        opacity: 0.2,
-        duration: 0.5,
-      });
-  });
+      describeRef.current = gsap
+        .timeline({ paused: true })
+        .from(describeSplitter.words, {
+          opacity: 0.05,
+          stagger: 0.07,
+          duration: 0.05,
+          ease: "sine.inOut",
+        });
+    },
+    { scope: cardRef },
+  );
 
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      threshold: 1.0,
-    };
+    const card = cardRef.current;
+    if (!card) return;
 
     const observer = new IntersectionObserver(([entries]) => {
-      if (!imageRef.current || !headerRef.current || !describeRef.current)
-        return;
-      if (entries.isIntersecting && entries.intersectionRatio === 1) {
-        imageRef.current.play();
-        headerRef.current.play();
-        describeRef.current.play();
-      } else {
-        imageRef.current.reverse();
-        headerRef.current.reverse();
-        describeRef.current?.reverse();
+      if (entries.isIntersecting) {
+        headerRef.current?.play();
+        describeRef.current?.play();
+        observer.unobserve(card);
       }
-    }, observerOptions);
+    }, {
+      root: card.closest(".skills-scroll-container"),
+      threshold: 0.1,
+    });
 
-    const targetElement = document.getElementById("skills-page");
-    if (!targetElement) return;
-    observer.observe(targetElement);
+    observer.observe(card);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -96,6 +84,7 @@ export default function ProjectCard({
       className={`
     flex ${projectRevere ? "flex-col md:flex-row-reverse" : "flex-col md:flex-row"}
     border-t border-t-[rgba(96,165,250,0.5)] w-[99%] mt-2 bg-black/20 h-auto md:h-90 md:my-15 mx-2 overflow-hidden`}
+      ref={cardRef}
     >
       <ProjectImage imageUrl={projectImageUrl} />
 
@@ -112,11 +101,12 @@ export default function ProjectCard({
 
         <Packages items={projectItems} />
 
-        <button
-          className="p-2 m-4 px-8 w-fit bg-[rgba(96,165,250,0.5)] border-2 border-white text-white rounded-2xl cursor-pointer"
+<div>
+   <button
+          className="p-2 m-4 px-8 w-fit bg-[rgba(0,255,255,0.1)] text-white rounded-2xl cursor-pointer"
           style={{
             boxShadow:
-              "inset 2px 2px 2px black, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
+              "inset 0.5px 0.5px 5px white, inset -0.5px -0.5px 5px white, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
             textShadow: "1px 1px 2px black",
           }}
         >
@@ -125,6 +115,17 @@ export default function ProjectCard({
           Link
           </a>
         </button>
+
+        <button
+        className="p-2 m-4 px-4 w-fit bg-[rgba(0,255,255,0.1)] text-white rounded-2xl cursor-pointer"
+          style={{
+            boxShadow:
+              "inset 0.5px 0.5px 5px white, inset -0.5px -0.5px 5px white, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
+            textShadow: "1px 1px 2px black",
+          }}
+        >View Code</button>
+</div>
+       
       </div>
     </div>
   );

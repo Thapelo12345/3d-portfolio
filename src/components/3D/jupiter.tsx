@@ -36,10 +36,11 @@ export default function Jupiter() {
     if (jupiter.current !== null) jupiter.current.rotation.y += delta * 0.08;
     if (!jupiter.current) return;
 
-    jupiter.current.position.x = THREE.MathUtils.lerp(
+    jupiter.current.position.x = THREE.MathUtils.damp(
       jupiter.current.position.x,
       targetX.current,
-      0.05,
+      3,
+      delta,
     );
   });
 
