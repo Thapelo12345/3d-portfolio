@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Component, Suspense, useRef, useEffect } from "react";
+import { Component, Suspense, useRef, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import Stars from "./stars";
 import Earth from "./earth";
@@ -68,29 +68,40 @@ function CameraController() {
 }
 
 export default function ThreeBackground() {
-  const aspectValue = window.innerWidth / window.innerHeight;
+  const [isMobile, setIsMobile] = useState(() =>
+    window.matchMedia("(max-width: 767px)").matches,
+  );
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+    const updateDeviceSize = () => setIsMobile(mobileQuery.matches);
+
+    mobileQuery.addEventListener("change", updateDeviceSize);
+    return () => mobileQuery.removeEventListener("change", updateDeviceSize);
+  }, []);
 
   return (
     <div
       className="absolute inset-0 flex items-center justify-center bg-black -z-40"
-      style={{ width: "100vw", height: "100vh" }}
+      style={{ width: "100%", height: "100dvh" }}
     >
       <ThreeSceneBoundary>
         <Canvas
-        dpr={[1, 1.5]}
-        gl={{ powerPreference: "high-performance", antialias: false }}
-        // raycaster={{ enabled: window.innerWidth > 768 }}
+        dpr={isMobile ? 1 : [1, 1.5]}
+        gl={{
+          powerPreference: isMobile ? "low-power" : "high-performance",
+          antialias: false,
+        }}
           camera={{
             fov: 6,
             near: 0.1,
             far: 2000,
-            aspect: aspectValue,
             position: [4, 0, 8],
           }}
         >
           <Suspense fallback={null}>
             <CameraController />
-            <Stars />
+            <Stars count={isMobile ? 1600 : 5000} />
             <directionalLight position={[-2, 0.2, 1.5]} color={"white"} />
             <Mars />
             <Earth />

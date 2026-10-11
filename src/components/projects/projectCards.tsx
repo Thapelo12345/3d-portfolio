@@ -3,13 +3,14 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import ProjectImage from "./ui/projectImage";
-import SplitText from "gsap/src/SplitText";
+import { SplitText } from "gsap/all";
 
 type PROPS = {
   projectImageUrl: string;
   projectTitle: string;
   projectDescription: string;
   projectLink: string;
+  codeLink: string;
   projectItems: string[];
   projectRevere: boolean;
 };
@@ -19,6 +20,7 @@ export default function ProjectCard({
   projectTitle,
   projectDescription,
   projectLink,
+  codeLink,
   projectItems,
   projectRevere,
 }: PROPS) {
@@ -31,13 +33,13 @@ export default function ProjectCard({
   // words animation
   useGSAP(
     () => {
-      gsap.registerPlugin(SplitText);
-
       const paragraph = paragraphRef.current;
       if (!paragraph) return;
 
-      const headerSplitter = SplitText.create(".header-char", {type: "chars"});
-      const describeSplitter = SplitText.create(paragraph, {type: "words"});
+      const headerSplitter = SplitText.create(".header-char", {
+        type: "chars",
+      });
+      const describeSplitter = SplitText.create(paragraph, { type: "words" });
 
       headerRef.current = gsap
         .timeline({ paused: true })
@@ -56,6 +58,11 @@ export default function ProjectCard({
           duration: 0.05,
           ease: "sine.inOut",
         });
+
+      return () => {
+        headerSplitter.revert();
+        describeSplitter.revert();
+      };
     },
     { scope: cardRef },
   );
@@ -64,16 +71,19 @@ export default function ProjectCard({
     const card = cardRef.current;
     if (!card) return;
 
-    const observer = new IntersectionObserver(([entries]) => {
-      if (entries.isIntersecting) {
-        headerRef.current?.play();
-        describeRef.current?.play();
-        observer.unobserve(card);
-      }
-    }, {
-      root: card.closest(".skills-scroll-container"),
-      threshold: 0.1,
-    });
+    const observer = new IntersectionObserver(
+      ([entries]) => {
+        if (entries.isIntersecting) {
+          headerRef.current?.play();
+          describeRef.current?.play();
+          observer.unobserve(card);
+        }
+      },
+      {
+        root: card.closest(".skills-scroll-container"),
+        threshold: 0.1,
+      },
+    );
 
     observer.observe(card);
     return () => observer.disconnect();
@@ -101,31 +111,33 @@ export default function ProjectCard({
 
         <Packages items={projectItems} />
 
-<div>
-   <button
-          className="p-2 m-4 px-8 w-fit bg-[rgba(0,255,255,0.1)] text-white rounded-2xl cursor-pointer"
-          style={{
-            boxShadow:
-              "inset 0.5px 0.5px 5px white, inset -0.5px -0.5px 5px white, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
-            textShadow: "1px 1px 2px black",
-          }}
-        >
-          <a href={projectLink} target="_blank">
+        <div>
+          <button
+            className="p-2 m-4 px-8 w-fit bg-[rgba(0,255,255,0.1)] text-white rounded-2xl cursor-pointer"
+            style={{
+              boxShadow:
+                "inset 0.5px 0.5px 5px white, inset -0.5px -0.5px 5px white, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
+              textShadow: "1px 1px 2px black",
+            }}
+          >
+            <a href={projectLink} target="_blank">
+              Link
+            </a>
+          </button>
 
-          Link
-          </a>
-        </button>
-
-        <button
-        className="p-2 m-4 px-4 w-fit bg-[rgba(0,255,255,0.1)] text-white rounded-2xl cursor-pointer"
-          style={{
-            boxShadow:
-              "inset 0.5px 0.5px 5px white, inset -0.5px -0.5px 5px white, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
-            textShadow: "1px 1px 2px black",
-          }}
-        >View Code</button>
-</div>
-       
+          <button
+            className="p-2 m-4 px-4 w-fit bg-[rgba(0,255,255,0.1)] text-white rounded-2xl cursor-pointer"
+            style={{
+              boxShadow:
+                "inset 0.5px 0.5px 5px white, inset -0.5px -0.5px 5px white, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
+              textShadow: "1px 1px 2px black",
+            }}
+          >
+            <a href={codeLink} target="_blank">
+              View Code
+            </a>
+          </button>
+        </div>
       </div>
     </div>
   );

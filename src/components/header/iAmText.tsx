@@ -12,19 +12,19 @@ export default function IMText() {
   const [targetProfession, setTargetProffession] = useState(0);
 
   useEffect(() => {
+    let delay: ReturnType<typeof setTimeout>;
     const nameChanger = setInterval(() => {
       setTargetWidth(6);
 
-      const delay = setTimeout(() => {
+      delay = setTimeout(() => {
         setTargetProffession((prev) => (prev === 3 ? 0 : prev + 1));
         setTargetWidth(100);
-
-        clearTimeout(delay);
       }, 1500);
     }, 8000);
 
     return () => {
       clearInterval(nameChanger);
+      clearTimeout(delay);
     };
   }, []);
 

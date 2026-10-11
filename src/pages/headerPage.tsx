@@ -42,7 +42,8 @@ export default function Header() {
       timeline.from(".main-image", {
           x: 510,
           rotateY: 360,
-          scale: 0.05,
+          scale: 0.04,
+          opacity: 0.2,
           stagger: 0.4,
           duration: 1,
           ease: "power2.inOut",

@@ -1,10 +1,10 @@
 import IMText from "./iAmText";
 import { useEffect, useRef } from "react";
 import { useMainStore } from "../../statemanagement/store";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import SplitText from "gsap/src/SplitText";
+import { SplitText } from "gsap/all";
 
 export default function HeaderText() {
   const headerTextRef = useRef<HTMLDivElement>(null);
@@ -14,10 +14,9 @@ export default function HeaderText() {
   const bottomBtn = useRef<gsap.core.Timeline | null>(null);
 
   const setCurrentPage = useMainStore((state) => state.setCurrentPage);
+  const shouldReduceMotion = useReducedMotion();
 
   useGSAP(() => {
-    gsap.registerPlugin(SplitText);
-
     const greetElement = greetElementRef.current;
     if (!greetElement) return;
 
@@ -41,6 +40,7 @@ export default function HeaderText() {
         ease: "back.in",
       });
 
+    return () => greetSplitter.revert();
   }, { scope: headerTextRef });
 
   useEffect(() => {
@@ -77,8 +77,14 @@ export default function HeaderText() {
             </span>
             <motion.span
               className="inline-block max-w-full text-4xl sm:text-5xl md:text-6xl font-normal leading-tight"
-              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              animate={shouldReduceMotion ? undefined : {
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+              }}
+              transition={shouldReduceMotion ? undefined : {
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear",
+              }}
               style={{
                 backgroundImage: "linear-gradient(90deg, #8b5cf6, aquamarine, #d946ef, #3b82f6, #8b5cf6)",
                 backgroundSize: "300% 100%",

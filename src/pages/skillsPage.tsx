@@ -9,29 +9,47 @@ export default function Skills() {
   const setActivePage = useMainStore((state) => state.setCurrentPage);
 
   const skillsPage = useRef<HTMLDivElement>(null);
+  const skillContainer = useRef<HTMLDivElement>(null)
+
+// useEffect(() => {
+//   const timer = setTimeout(() => {
+//     if (skillContainer.current) {
+//       skillContainer.current.scrollTo({ top: 0, behavior: "instant" }); // Use "instant" to avoid visible jumps
+//     }
+//   }, 10);
+
+//   return () => clearTimeout(timer);
+// }, [])
 
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      threshold: 1.0,
-    };
+    const page = skillsPage.current;
+    if (!page) return;
 
-    const observer = new IntersectionObserver(([entries]) => {
-      if (entries.isIntersecting && entries.intersectionRatio === 1) {
-        if (skillsPage.current?.id) {
-          setActivePage(skillsPage.current?.id);
-        }
-      }
-    }, observerOptions);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && page.id) {
+          setActivePage(page.id)
+          skillContainer.current?.scrollTo({ top: 0, behavior: "instant" });
+        };
+      },
+      {
+        root: page.closest(".main-container"),
+        threshold: 0.15,
+      },
+    );
 
-    if (!skillsPage.current) return;
-    observer.observe(skillsPage.current);
-  }, []);
+    observer.observe(page);
+    return () => {
+      observer.disconnect();
+    }
+  }, [setActivePage]);
 
   return (
     <div ref={skillsPage} id="skills-page" className="section-pages">
-      <div className="skills-scroll-container custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full overflow-y-scroll">
         <PageTitle pageTitle="My Work" />
+      <div 
+      ref={skillContainer}
+      className="skills-scroll-container custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full overflow-y-scroll">
         <WebApplications />
         <MobileApplications />
       </div>

@@ -1,8 +1,8 @@
 import type { ComponentType, SVGProps } from "react";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import SplitText from "gsap/src/SplitText";
+import { SplitText } from "gsap/all";
 
 type PROPS = {
   detailsTitle: string;
@@ -14,40 +14,37 @@ export default function DetailsCell({
   icon: Icon,
   userInfo,
 }: PROPS) {
+  const cellRef = useRef<HTMLDivElement>(null);
 
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  useGSAP(() => {
+    const cell = cellRef.current;
+    const userInfoElement = cell?.querySelector(".user-info");
+    const scroller = cell?.closest<HTMLElement>(".custom-scrollbar");
+    if (!cell || !userInfoElement || !scroller) {
+      throw new Error("DetailsCell must be inside a .custom-scrollbar");
+    }
 
-  useGSAP(()=>{
-    gsap.registerPlugin(SplitText)
-    const h5Splitter = SplitText.create(".user-info", {type: "chars"})
+    const textSplit = SplitText.create(userInfoElement, { type: "chars" });
 
-    tlRef.current = gsap.timeline({pause: true}).to(h5Splitter.chars, {
-    keyframes :{ y: [0, -10, 0], opacity: [0.1, 0.6, 1]},
-
-    stagger: 0.04,
-    duration: 0.2,
-   
-    })
-
-  })
-
-  useEffect(()=>{
-    const element = document.getElementById("contact-page");
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {tlRef.current?.play()}
-        else { tlRef.current?.reverse()}
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: cell,
+        scroller,
+        start: "top 95%",
+        end: "bottom 5%",
+        toggleActions: "play reverse play reverse",
       },
-      {threshold: 1.0,}
-    );
+    }).from(textSplit.chars, {
+      keyframes: { y: [0, -8, 0], autoAlpha: [0.1, 0.6, 1] },
+      stagger: 0.025,
+      duration: 0.2,
+    });
 
-    observer.observe(element);
-  }, [])
+    return () => textSplit.revert();
+  }, { scope: cellRef });
 
   return (
-    <div className="m-4">
+    <div ref={cellRef} className="m-4">
       <label className="text-white/30 ml-10">{detailsTitle}</label>
       <div className="flex flex-row gap-4 items-center">
         <Icon className="w-4 h-4 text-blue-400" />

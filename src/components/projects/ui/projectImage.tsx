@@ -29,7 +29,7 @@ export default function ProjectImage({ imageUrl }: PROP) {
       const percentY = (y - centerY) / centerY;
 
       // Maximum rotation angles in degrees
-      const maxRotation = 20; 
+      const maxRotation = 12;
 
       // Note: Moving mouse UP (negative percentY) tilts card FORWARD (positive rotateX)
       // Moving mouse RIGHT (positive percentX) tilts card RIGHT (positive rotateY)
@@ -72,7 +72,7 @@ export default function ProjectImage({ imageUrl }: PROP) {
     >
       <img
         ref={imageRef}
-        className="project-image w-full md:w-150 h-80 rounded-lg [transform-style:preserve-3d]"
+        className="project-image w-[80%] h-40 md:w-150 md:h-80 rounded-lg [transform-style:preserve-3d]"
         src={imageUrl}
         alt="Project image"
       />

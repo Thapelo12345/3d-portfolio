@@ -1,64 +1,63 @@
-import { useEffect, useRef } from "react"
-import gsap from "gsap"
-import { useGSAP } from "@gsap/react"
-import SplitText from "gsap/src/SplitText";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/all";
 
-export default function ContactHeader(){
+export default function ContactHeader() {
+  const headerContainerRef = useRef<HTMLDivElement>(null);
 
-const headerRef = useRef<gsap.core.Timeline | null>(null);
-const questionRef = useRef<gsap.core.Timeline | null>(null);
+  useGSAP(() => {
+    const container = headerContainerRef.current;
+    const scroller = container?.closest<HTMLElement>(".custom-scrollbar");
+    if (!container || !scroller) {
+      throw new Error("ContactHeader must be inside a .custom-scrollbar");
+    }
 
-  useGSAP(()=>{
-    gsap.registerPlugin(SplitText)
+    const headerSplitter = SplitText.create(".contact-header", {
+      type: "chars",
+    });
+    const questionSplitter = SplitText.create(".question", { type: "words" });
 
-    const headerSplitter = SplitText.create(".contact-header", {type: "chars"})
-    const questionSplitter = SplitText.create(".question", {type: "words"})
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: container,
+          scroller,
+          start: "top 95%",
+          end: "bottom 5%",
+          toggleActions: "play reverse play reverse",
+        },
+      })
+      .from(headerSplitter.chars, {
+        rotateX: 80,
+        stagger: 0.025,
+        autoAlpha: 0.1,
+        duration: 0.15,
+      })
+      .from(
+        questionSplitter.words,
+        {
+          xPercent: 35,
+          stagger: 0.025,
+          autoAlpha: 0.2,
+          duration: 0.15,
+        },
+        ">-0.1",
+      );
 
-    headerRef.current = gsap.timeline({pause: true}).from(headerSplitter.chars, {
-      rotateX: 80,
-      stagger: 0.05,
-      opacity: 0.1,
-      duration: 0.05
-    })
-
-    questionRef.current = gsap.timeline({pause: true}).from(questionSplitter.words, {
-      x:450,
-      stagger: 0.05,
-      opacity: 0.2,
-      duration: 0.05
-    })
-
-  })//end of use G sap
-
-  useEffect(()=>{
-     const observerOptions = {
-      root: null,
-      threshold: 1.0,
+    return () => {
+      headerSplitter.revert();
+      questionSplitter.revert();
     };
-    const observer = new IntersectionObserver(([entries]) => {
-      if(!headerRef.current || !questionRef.current) return
+  }, { scope: headerContainerRef });
 
-      if (entries.isIntersecting && entries.intersectionRatio === 1) {
-        headerRef.current.play()
-        questionRef.current.play()
-      }
-      else{
-        headerRef.current.reverse()
-        questionRef.current.reverse()
-      }
-
-    }, observerOptions);
-
-    const targetElement = document.getElementById("contact-page")
-
-    if (!targetElement) return;
-    observer.observe(targetElement);
-  }, [])
-
-    return(
-        <div className="h-fit font-titillium p-2 w-full md:w-1/3 bg-black/20 backdrop-blur-[2px] rounded-lg mx-auto my-0 overflow-hidden">
+  return (
+    <div
+      ref={headerContainerRef}
+      className="h-fit font-titillium p-2 w-full md:w-1/3 bg-black/20 backdrop-blur-[2px] rounded-lg mx-auto my-0 overflow-hidden"
+    >
         <h1 
-        className="contact-header text-white text-6xl">
+        className="contact-header text-white text-4xl md:text-6xl">
           Let's talk across
           <span className="text-blue-400"> A distance.</span>
         </h1>
@@ -66,6 +65,6 @@ const questionRef = useRef<gsap.core.Timeline | null>(null);
         <p className="question text-white/50">
           Tell me about the thing you're building. I read every message and reply within one orbit — usually a single working day.
         </p>
-        </div>
-    )
+    </div>
+  );
 }

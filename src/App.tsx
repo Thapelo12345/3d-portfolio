@@ -8,7 +8,7 @@ function App() {
   const [showDetail, setShowDetail] = useState(false);
 
   return (
-    <div className="relative w-screen h-screen m-0 p-0 overflow-hidden">
+    <div className="relative w-full h-dvh m-0 p-0 overflow-hidden">
       <ThreeBackground />
 
       <div
