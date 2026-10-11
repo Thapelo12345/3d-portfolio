@@ -1,5 +1,6 @@
 import Packages from "../about/libraries";
 import MobileProjectImage from "./ui/mobileProjectImage";
+import { publicAsset } from "../../assets/publicAsset";
 
 type PROPS = {
   projectImageUrl: string;
@@ -20,9 +21,9 @@ export default function MobileCard({
 
       <div className="relative flex items-center justify-center w-full md:w-1/2 h-full">
 
-      <MobileProjectImage imageUrls="mobile project/background-square.png" leftPosition={0}/>
+      <MobileProjectImage imageUrls={publicAsset("mobile project/background-square.png")} leftPosition={0}/>
       <MobileProjectImage imageUrls={projectImageUrl} leftPosition={0}/>
-      <MobileProjectImage imageUrls="mobile project/background-second.png" leftPosition={0}/>
+      <MobileProjectImage imageUrls={publicAsset("mobile project/background-second.png")} leftPosition={0}/>
     
       </div>
 

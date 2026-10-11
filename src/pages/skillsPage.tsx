@@ -11,16 +11,6 @@ export default function Skills() {
   const skillsPage = useRef<HTMLDivElement>(null);
   const skillContainer = useRef<HTMLDivElement>(null)
 
-// useEffect(() => {
-//   const timer = setTimeout(() => {
-//     if (skillContainer.current) {
-//       skillContainer.current.scrollTo({ top: 0, behavior: "instant" }); // Use "instant" to avoid visible jumps
-//     }
-//   }, 10);
-
-//   return () => clearTimeout(timer);
-// }, [])
-
   useEffect(() => {
     const page = skillsPage.current;
     if (!page) return;
@@ -49,7 +39,7 @@ export default function Skills() {
         <PageTitle pageTitle="My Work" />
       <div 
       ref={skillContainer}
-      className="skills-scroll-container custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full overflow-y-scroll">
+      className="skills-scroll-container custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full pb-200 overflow-y-scroll">
         <WebApplications />
         <MobileApplications />
       </div>
