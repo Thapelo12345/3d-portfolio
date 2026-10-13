@@ -27,6 +27,9 @@ export default function TechnicalMaquee() {
       <ImageHolder imageUrl={publicAsset("about-icons/langchain-color.png")}/>
       <ImageHolder imageUrl={publicAsset("about-icons/langgraph-color.png")} />
       <ImageHolder imageUrl={publicAsset("about-icons/threedotjs-dark.png")} />
+      <ImageHolder imageUrl={publicAsset("about-icons/git.png")} />
+      <ImageHolder imageUrl={publicAsset("about-icons/gsap-dark.png")} />
+      {/* <ImageHolder imageUrl={publicAsset("about-icons/gsap-dark.png")} /> */}
       </Marquee>
     </div>
   );

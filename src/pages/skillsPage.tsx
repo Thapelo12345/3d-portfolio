@@ -9,7 +9,7 @@ export default function Skills() {
   const setActivePage = useMainStore((state) => state.setCurrentPage);
 
   const skillsPage = useRef<HTMLDivElement>(null);
-  const skillContainer = useRef<HTMLDivElement>(null)
+  const skillContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const page = skillsPage.current;
@@ -18,9 +18,9 @@ export default function Skills() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && page.id) {
-          setActivePage(page.id)
+          setActivePage(page.id);
           skillContainer.current?.scrollTo({ top: 0, behavior: "instant" });
-        };
+        }
       },
       {
         root: page.closest(".main-container"),
@@ -31,15 +31,16 @@ export default function Skills() {
     observer.observe(page);
     return () => {
       observer.disconnect();
-    }
+    };
   }, [setActivePage]);
 
   return (
     <div ref={skillsPage} id="skills-page" className="section-pages">
-        <PageTitle pageTitle="My Work" />
-      <div 
-      ref={skillContainer}
-      className="skills-scroll-container custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full pb-200 overflow-y-scroll">
+      <PageTitle pageTitle="My Work" />
+      <div
+        ref={skillContainer}
+        className="skills-scroll-container custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full pb-200 overflow-y-scroll"
+      >
         <WebApplications />
         <MobileApplications />
       </div>
