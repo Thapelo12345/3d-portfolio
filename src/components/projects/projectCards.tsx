@@ -93,7 +93,7 @@ export default function ProjectCard({
     <div
       className={`
     flex ${projectRevere ? "flex-col md:flex-row-reverse" : "flex-col md:flex-row"}
-    border-t border-t-[rgba(96,165,250,0.5)] w-[99%] mt-2 bg-black/20 h-auto md:h-90 md:my-15 mx-2 overflow-hidden`}
+    border-t border-t-[rgba(96,165,250,0.5)] w-[99%] mt-2 bg-black/20 h-auto lg:h-90 lg:my-15 mx-2 overflow-hidden`}
       ref={cardRef}
     >
       <ProjectImage imageUrl={projectImageUrl} />

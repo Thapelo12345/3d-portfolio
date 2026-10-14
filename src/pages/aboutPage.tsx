@@ -88,13 +88,14 @@ export default function About() {
   }, [setActivePage]);
 
   return (
-    <div ref={aboutPage} id="about-page" className="pt-25 md:pt-0 section-pages">
+    <div ref={aboutPage} id="about-page" className="pt-25 lg:pt-0 section-pages">
       <div
         ref={innerContainerRef}
         className="relative custom-scrollbar grid grid-cols-1 gap-8 w-full h-full overflow-x-hidden [scroll-snap-type:y_mandatory] overflow-y-scroll"
       >
         <PageTitle pageTitle="About Myself" />
         <img
+          className="absolute inset-0 rotate-y-0 w-full h-full md:w-78 md:h-80 rounded-full mx-auto my-4 hidden lg:block duration-1000 transition-all -z-10"
           ref={imageRef}
           src={publicAsset("School.png")}
           alt="Thapelo"
@@ -103,12 +104,11 @@ export default function About() {
             top: `${imagePositionY}px`,
             transform: `rotateY(${imageRotateY}deg)`,
           }}
-          className="absolute inset-0 rotate-y-0 w-full h-full md:w-78 md:h-80 rounded-full mx-auto my-4 hidden md:block duration-1000 transition-all -z-10"
         />
 
         <section
           ref={section1}
-          className="flex flex-col items-center justify-evenly md:justify-between w-screen md:w-full h-screen -mt-31 snap-start"
+          className="flex flex-col items-center justify-evenly md:justify-center lg:justify-between w-screen md:w-full h-screen -mt-31 snap-start"
         >
           <Introduction />
           <TechnicalMaquee />

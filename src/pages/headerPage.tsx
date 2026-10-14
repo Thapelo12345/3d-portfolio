@@ -91,8 +91,8 @@ export default function Header() {
       id="header-page"
       className="overflow-y-auto section-pages flex flex-col items-center justify-center"
     >
-      <div className="h-full mx-auto px-6 md:px-12 relative z-10 transition-transform duration-300 ease-out">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
+      <div className="h-full md:h-1/2 lg:h-full mx-auto px-6 md:px-12 relative z-10 transition-transform duration-300 ease-out">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-10 lg:gap-16">
           {/* set observation here */}
           <HeaderText />
 
@@ -103,7 +103,7 @@ export default function Header() {
             onMouseLeave={() => animateImageHover(false)}
           >
             <div
-              className="relative w-64 h-64 md:w-70 md:h-70"
+              className="relative w-44 h-45 lg:w-64 lg:h-64 md:w-70 md:h-70"
             >
               <img
                 src={publicAsset("me color.png")}

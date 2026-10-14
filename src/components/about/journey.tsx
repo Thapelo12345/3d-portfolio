@@ -2,12 +2,12 @@ import JourneySection from "./journeySections";
 
 export default function Journey() {
   return (
-    <div className="custom-scrollbar md:ml-40 w-screen md:w-[70%] h-[90%] rounded-2xl">
+    <div className="custom-scrollbar lg:ml-40 w-screen lg:w-[70%] h-[90%] rounded-2xl">
       <h2 className="text-white text-center text-2xl ">
         My <span className="text-blue-400"> Journey</span>
       </h2>
 
-      <div className="w-full md:w-[97%] h-[87%] md:m-4 [scroll-snap-type:y_mandatory] overflow-x-hidden overflow-y-auto">
+      <div className="w-full lg:w-[97%] h-[87%] lg:m-4 [scroll-snap-type:y_mandatory] overflow-x-hidden overflow-y-auto">
         <JourneySection
           alignment="right"
           title1="Sta"

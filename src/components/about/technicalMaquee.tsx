@@ -7,7 +7,7 @@ const Marquee = ((MarqueeModule as unknown as Record<string, unknown>)
 
 export default function TechnicalMaquee() {
   return (
-    <div className="w-full h-15 overflow-hidden py-2">
+    <div className="w-full h-15 overflow-hidden lg:py-2">
       <Marquee speed={50} gradient={false}>
         
       <ImageHolder imageUrl={publicAsset("about-icons/TS-icon.png")} />
@@ -29,7 +29,6 @@ export default function TechnicalMaquee() {
       <ImageHolder imageUrl={publicAsset("about-icons/threedotjs-dark.png")} />
       <ImageHolder imageUrl={publicAsset("about-icons/git.png")} />
       <ImageHolder imageUrl={publicAsset("about-icons/gsap-dark.png")} />
-      {/* <ImageHolder imageUrl={publicAsset("about-icons/gsap-dark.png")} /> */}
       </Marquee>
     </div>
   );

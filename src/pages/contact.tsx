@@ -19,6 +19,7 @@ export default function Contact() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && page.id) setActivePage(page.id);
+        contactPageRef.current?.scrollTo({ top: 0, behavior: "instant" });
       },
       {
         root: page.closest(".main-container"),
@@ -39,8 +40,8 @@ export default function Contact() {
         <PageTitle pageTitle="Personal Contacts" />
         <ContactHeader />  
 
-        {/* <div className="flex flex-row items-center justify-center mt-10 w-full p-2"> */}
-       <div className="grid gird-cols-1 md:grid-cols-[repeat(2,1fr)] grid-rows-1 gap-2 mt-10  w-full md:w-300 mx-auto pb-8 p-2">
+       <div 
+       className="grid gird-cols-1 lg:grid-cols-[repeat(2,1fr)] grid-rows-1 gap-2 mt-10 w-full lg:w-300 mx-auto pb-8 p-2">
         <Message />
         <Details />  
         <Links />

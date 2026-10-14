@@ -68,11 +68,11 @@ export default function ProjectImage({ imageUrl }: PROP) {
   return (
     <div
       ref={imageContainerRef}
-      className="image-container flex items-center justify-center w-full md:w-1/2 h-full [perspective:1000px]"
+      className="image-container mt-10 lg:mt-0 flex items-center justify-center w-full md:w-1/2 h-full [perspective:1000px]"
     >
       <img
         ref={imageRef}
-        className="project-image w-[80%] h-40 md:w-150 md:h-80 rounded-lg [transform-style:preserve-3d]"
+        className="project-image w-[80%] h-40 md:h-50 lg:w-150 lg:h-80 rounded-lg [transform-style:preserve-3d]"
         src={imageUrl}
         alt="Project image"
       />

@@ -54,12 +54,11 @@ export default function ContactHeader() {
   return (
     <div
       ref={headerContainerRef}
-      className="h-fit font-titillium p-2 w-full md:w-1/3 bg-black/20 backdrop-blur-[2px] rounded-lg mx-auto my-0 overflow-hidden"
+      className="h-fit font-titillium p-2 w-full md:w-[70%] lg:w-1/3 bg-black/20 backdrop-blur-[2px] rounded-lg mx-auto my-0 overflow-hidden"
     >
         <h1 
         className="contact-header text-white text-4xl md:text-6xl">
-          Let's talk across
-          <span className="text-blue-400"> A distance.</span>
+        Let's talk across <span className="text-blue-400">A distance.</span>
         </h1>
 
         <p className="question text-white/50">

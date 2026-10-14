@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { publicAsset } from "../../assets/publicAsset";
 import { SplitText, ScrollTrigger } from "gsap/all";
 
 export default function Introduction() {
@@ -37,8 +38,17 @@ export default function Introduction() {
   return (
     <div 
     ref={introContainerRef}
-    className="intro-container -mt-20 md:mt-0 md:px-4 flex flex-row w-full md:w-[90%] md:mx-auto overflow-hidden">
-      <div className="p-2 w-full md:w-1/2 mt-20 h-fit overflow-hidden">
+    className="intro-container -mt-20 md:mt-0 lg:px-4 flex flex-row w-full md:w-[90%] md:mx-auto overflow-hidden">
+      <div className="p-2 w-full lg:w-1/2 mt-20 h-fit overflow-hidden">
+
+    <div className="w-1/2 h-90 mx-auto hidden md:block lg:hidden">
+     <img
+        className="w-full h-full md:w-78 md:h-80 rounded-full mx-auto"
+        src={publicAsset("School.png")}
+        alt="Thapelo"
+     />
+      </div>
+     
         <h1
           className="text-center text-2xl mt-20 underline-offset-1 underline text-white"
           style={{ textShadow: "1px 1px 2px black" }}

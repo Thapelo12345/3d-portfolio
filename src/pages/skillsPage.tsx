@@ -39,7 +39,7 @@ export default function Skills() {
       <PageTitle pageTitle="My Work" />
       <div
         ref={skillContainer}
-        className="skills-scroll-container custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full pb-200 overflow-y-scroll"
+        className="skills-scroll-container custom-scrollbar grid grid-cols-1 gap-8 w-full max-h-full md:h-full pb-20 md:pb-200 overflow-y-scroll"
       >
         <WebApplications />
         <MobileApplications />

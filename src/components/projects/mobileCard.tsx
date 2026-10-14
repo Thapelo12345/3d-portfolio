@@ -17,8 +17,8 @@ export default function MobileCard({
   projectLink,
 }: PROPS) {
   return (
-    <div className="flex flex-col md:flex-row-reverse border-t border-t-[rgba(96,165,250,0.5)] w-[99%] mt-2 bg-black/20 h-fit md:h-90 my-8 mx-2 overflow-hidden">
-      <div className="relative flex items-center justify-center w-full md:w-1/2 h-full">
+    <div className="flex flex-col lg:flex-row-reverse border-t border-t-[rgba(96,165,250,0.5)] w-[99%] mt-2 bg-black/20 h-fit lg:h-90 lg:my-8 mx-2 overflow-hidden">
+      <div className="relative flex items-center justify-center w-full lg:w-1/2 h-full">
         <MobileProjectImage
           imageUrls={publicAsset("mobile project/background-square.png")}
           leftPosition={0}
@@ -30,7 +30,7 @@ export default function MobileCard({
         />
       </div>
 
-      <div className="w-full md:w-1/2 md:h-full py-4 px-2 backdrop:blur-xs ">
+      <div className="w-full lg:w-1/2 md:h-full py-4 px-2 backdrop:blur-xs ">
         <h1 className="text-white text-center text-2xl my-4">
           {projectTitle}
           <span className="text-blue-400"> Application</span>
