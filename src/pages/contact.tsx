@@ -4,7 +4,6 @@ import PageTitle from "../components/pageTitles";
 import ContactHeader from "../components/contact/contactHeader";
 import Details from "../components/contact/details";
 import Message from "../components/contact/message";
-// import Links from ""
 import Links from "../components/contact/link"
 
 export default function Contact() {

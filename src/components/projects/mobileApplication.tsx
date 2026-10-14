@@ -4,7 +4,7 @@ import { publicAsset } from "../../assets/publicAsset";
 const frameWorks = ["React-Native", "Clerk", "nativewind", "Jest"];
 export default function MobileApplications() {
   return (
-    <div className="w-full h-fit mb-20 -mt-85 md:mt-130 overflow-x-hidden">
+    <div className="w-full h-fit lg:pb-0 pb-20 overflow-x-hidden">
       <h1 className="text-center text-white text-4xl mb-2">
         Mobile
         <span className="text-blue-400"> Applications</span>

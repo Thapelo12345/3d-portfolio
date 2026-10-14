@@ -14,10 +14,9 @@ const framesWork = ["JavaScript", "vite-React", "Tailwind", "LoveAble"];
 
 export default function WebApplications() {
   return (
-    <div className="w-full h-fit mb-90 overflow-x-hidden">
+    <div className="w-full">
       <h1 className="text-center text-white text-4xl mb-4">
-        Web
-        <span className="text-blue-400"> Applications</span>
+        Web <span className="text-blue-400"> Applications</span>
       </h1>
 
       <ProjectCard
@@ -31,13 +30,23 @@ export default function WebApplications() {
       />
 
       <ProjectCard
+        projectImageUrl={publicAsset("Projects/clothing-store.png")}
+        projectTitle="clothing Store"
+        projectDescription="Welcome to All Wear, your one-stop destination for fashion and technology. We blend style with innovation, offering trendy clothing alongside the latest TVs and gadgets—all in one place. Whether you're refreshing your wardrobe or upgrading your home entertainment, we've got you covered. Shop quality apparel, cutting-edge electronics, and everything in between with ease."
+        projectLink="https://clothing-shop-two-alpha.vercel.app/"
+        codeLink="https://github.com/Thapelo12345/clothing-shop"
+        projectItems={frameWorks}
+        projectRevere={false}
+      />
+
+      <ProjectCard
         projectImageUrl={publicAsset("Projects/Weather.png")}
         projectTitle="Weather"
         projectDescription="A sleek, real-time weather application built with React and Tailwind CSS. It delivers instant, hyper-local forecasts, responsive radar visuals, and accurate 7-day climate insights through a clean, modern interface."
         projectLink="https://thapelo12345.github.io/weather-app/"
         codeLink="https://github.com/Thapelo12345/weather-app"
         projectItems={frameWorks}
-        projectRevere={false}
+        projectRevere={true}
       />
     </div>
   );
