@@ -49,7 +49,9 @@ export default function MobileCard({
             textShadow: "1px 1px 2px black",
           }}
         >
+          <a href="https://drive.google.com/file/d/1-_ZZxbYnSo277I-5gvN0YW8nI36ngrrF/view?usp=drive_link">
           Download
+          </a>
         </button>
       </div>
     </div>
