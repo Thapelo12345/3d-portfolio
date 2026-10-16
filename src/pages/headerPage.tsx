@@ -67,8 +67,8 @@ export default function Header() {
     if (!page) return;
 
     const observer = new IntersectionObserver(
-      ([entries]) => {
-        if (entries.isIntersecting) {
+      ([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 1) {
           if (page.id) {
             setActivePage(page.id);
           }
@@ -77,7 +77,7 @@ export default function Header() {
       },
       {
         root: page.closest(".main-container"),
-        threshold: 0.15,
+        threshold: 1,
       },
     );
 

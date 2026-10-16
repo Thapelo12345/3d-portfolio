@@ -17,14 +17,14 @@ export default function Skills() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && page.id) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 1 && page.id) {
           setActivePage(page.id);
           skillContainer.current?.scrollTo({ top: 0, behavior: "instant" });
         }
       },
       {
         root: page.closest(".main-container"),
-        threshold: 0.15,
+        threshold: 1,
       },
     );
 

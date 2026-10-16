@@ -17,12 +17,14 @@ export default function Contact() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && page.id) setActivePage(page.id);
-        contactPageRef.current?.scrollTo({ top: 0, behavior: "instant" });
+        if (entry.isIntersecting && entry.intersectionRatio >= 1) {
+          if (page.id) setActivePage(page.id);
+          contactPageRef.current?.scrollTo({ top: 0, behavior: "instant" });
+        }
       },
       {
         root: page.closest(".main-container"),
-        threshold: 0.15,
+        threshold: 1,
       },
     );
 

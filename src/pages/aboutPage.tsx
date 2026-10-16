@@ -72,14 +72,14 @@ export default function About() {
 
     const pageObserver = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && page.id) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 1 && page.id) {
           setActivePage(page.id)
           innerContainerRef.current?.scrollTo({ top: 0, behavior: "instant" });
         };
       },
       {
         root: page.closest(".main-container"),
-        threshold: 0.15,
+        threshold: 1,
       },
     );
 
