@@ -41,18 +41,31 @@ export default function MobileCard({
 
         <Packages items={projectItems} />
 
-        <button
-          className="p-2 m-4 px-8 w-fit bg-[rgba(96,165,250,0.5)] border-2 border-white text-white rounded-2xl cursor-pointer"
-          style={{
-            boxShadow:
-              "inset 2px 2px 2px black, 1px 2px 9px black, 1px 2px 9px white",
-            textShadow: "1px 1px 2px black",
-          }}
-        >
-          <a href="https://drive.google.com/file/d/1-_ZZxbYnSo277I-5gvN0YW8nI36ngrrF/view?usp=drive_link">
-          Download
-          </a>
-        </button>
+        <div>
+          <button
+            className="p-2 m-4 px-8 w-fit border border-white text-white rounded-md cursor-pointer"
+            style={{
+              boxShadow:
+                "inset 2px 5px 6px black, inset 1px 3px 6px gray, inset -2px -5px 6px black, inset -1px -3px 6px gray",
+                backdropFilter: "blur(5px)",
+            }}
+          >
+            <a href="https://drive.google.com/file/d/1-_ZZxbYnSo277I-5gvN0YW8nI36ngrrF/view?usp=drive_link">
+              Download
+            </a>
+          </button>
+
+          <button
+            className="border border-white cursor-pointer p-2 px-4 text-white rounded-md"
+            style={{
+              boxShadow:
+                "inset 2px 5px 6px black, inset 1px 3px 6px gray, inset -2px -5px 6px black, inset -1px -3px 6px gray",
+                backdropFilter: "blur(5px)",
+            }}
+          >
+            <a href="https://github.com/Thapelo12345/neststream">Git Code</a>
+          </button>
+        </div>
       </div>
     </div>
   );

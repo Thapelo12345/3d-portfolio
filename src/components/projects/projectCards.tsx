@@ -113,24 +113,24 @@ export default function ProjectCard({
 
         <div>
           <button
-            className="p-2 m-4 px-8 w-fit bg-[rgba(0,255,255,0.1)] text-white rounded-2xl cursor-pointer"
+            className="border border-white cursor-pointer m-4 p-2 px-4 text-white rounded-md"
             style={{
               boxShadow:
-                "inset 0.5px 0.5px 5px white, inset -0.5px -0.5px 5px white, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
-              textShadow: "1px 1px 2px black",
+                "inset 2px 5px 6px black, inset 1px 3px 6px gray, inset -2px -5px 6px black, inset -1px -3px 6px gray",
+              backdropFilter: "blur(5px)",
             }}
           >
             <a href={projectLink} target="_blank">
-              Link
+              Live Site
             </a>
           </button>
 
           <button
-            className="p-2 m-4 px-4 w-fit bg-[rgba(0,255,255,0.1)] text-white rounded-2xl cursor-pointer"
+            className="border border-white cursor-pointer p-2 px-4 text-white rounded-md"
             style={{
               boxShadow:
-                "inset 0.5px 0.5px 5px white, inset -0.5px -0.5px 5px white, 1px 2px 9px black, 1px 2px 15px rgba(96,165,250,0.5)",
-              textShadow: "1px 1px 2px black",
+                "inset 2px 5px 6px black, inset 1px 3px 6px gray, inset -2px -5px 6px black, inset -1px -3px 6px gray",
+              backdropFilter: "blur(5px)",
             }}
           >
             <a href={codeLink} target="_blank">
